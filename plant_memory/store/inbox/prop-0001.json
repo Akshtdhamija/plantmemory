@@ -1,0 +1,62 @@
+{
+  "proposal_id": "prop-0001",
+  "status": "pending",
+  "kind": "addition",
+  "target_entry_id": "",
+  "proposer": "diagnostic agent",
+  "rationale": "Drafted automatically from a backpass-fouling investigation on 2022-03-31. New failure mode not yet in the knowledge base; submitted for SME review.",
+  "created_at": "2026-09-25T04:25:13+00:00",
+  "decided_at": "",
+  "decided_by": "",
+  "entry": {
+    "id": "km-0015",
+    "title": "Cold-end air preheater fouling shows as a widening flue-gas / air temperature gap",
+    "category": "failure_mode",
+    "statement": "A slowly widening gap between rising economizer flue-gas outlet temperature (TE_8319A/B) and falling secondary-air preheater outlet temperature (TE_8304) indicates cold-end air-preheater fouling, well before either alarm trips.",
+    "body": "During a backpass fouling review the flue-gas outlet temperature crept up while the secondary-air preheater outlet temperature drifted down over three days. The two moving in opposite directions is the signature of cold-end deposits reducing heat transfer.\n\nPer trb_backpass_fouling: trend the temperature gap rather than either tag alone.",
+    "corrective_actions": [
+      "Trend the TE_8319A/B minus TE_8304 gap daily; schedule soot-blowing when it widens beyond 15 degC.",
+      "Inspect the cold-end baskets per mnt_air_preheater_inspection at the next outage."
+    ],
+    "groundings": [
+      {
+        "kind": "tag",
+        "ref": "TE_8319A",
+        "aspect": "normal_range",
+        "fingerprint": "8cd0951ac9bdf94f",
+        "note": "rising flue-gas outlet temperature"
+      },
+      {
+        "kind": "tag",
+        "ref": "TE_8304",
+        "aspect": "normal_range",
+        "fingerprint": "8cd0951ac9bdf94f",
+        "note": "falling secondary-air outlet temperature"
+      },
+      {
+        "kind": "kg_node",
+        "ref": "secondary_air_system",
+        "aspect": "connections",
+        "fingerprint": "c36dee1c9dec52a8",
+        "note": "air preheater sits in this system"
+      }
+    ],
+    "evidence": [
+      "investigation 2022-03-31",
+      "trb_backpass_fouling"
+    ],
+    "confidence": 0.68,
+    "status": "active",
+    "tags_referenced": [
+      "TE_8319A",
+      "TE_8319B",
+      "TE_8304"
+    ],
+    "source": "agent",
+    "author": "diagnostic agent",
+    "session": "",
+    "created_at": "",
+    "updated_at": "",
+    "provenance": {}
+  }
+}

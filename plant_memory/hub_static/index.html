@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PlantMemory Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">PM</div>
+        <div>
+          <div class="brand-name">PlantMemory</div>
+          <div class="brand-sub">institutional memory for industrial AI</div>
+        </div>
+      </div>
+      <nav id="nav">
+        <button class="nav-item active" data-view="overview"><span class="ni">◈</span> Overview</button>
+        <button class="nav-item" data-view="drift"><span class="ni">⚡</span> Drift Explorer</button>
+        <button class="nav-item" data-view="moc"><span class="ni">⚖</span> Change (MOC) <span class="pill" id="pill-moc"></span></button>
+        <button class="nav-item" data-view="knowledge"><span class="ni">▤</span> Knowledge</button>
+        <button class="nav-item" data-view="graph"><span class="ni">◇</span> Plant Graph</button>
+        <button class="nav-item" data-view="inbox"><span class="ni">✉</span> Inbox <span class="pill" id="pill-inbox"></span></button>
+        <button class="nav-item" data-view="relays"><span class="ni">⇄</span> Relays <span class="pill" id="pill-relays"></span></button>
+        <button class="nav-item" data-view="evaluation"><span class="ni">📊</span> Evaluation</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="foot-line">Grounded knowledge · drift-aware</div>
+        <div class="foot-line dim">127.0.0.1 · local only</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="view-title">Overview</h1>
+          <p id="view-sub" class="muted">The plant's living memory at a glance</p>
+        </div>
+        <div class="scenario-box" id="scenario-box" hidden>
+          <label>Simulate plant change</label>
+          <select id="scenario-select"></select>
+        </div>
+      </header>
+      <section id="view" class="view"></section>
+    </main>
+  </div>
+
+  <div id="drawer" class="drawer" hidden>
+    <div class="drawer-scrim" data-close></div>
+    <div class="drawer-panel" id="drawer-panel"></div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

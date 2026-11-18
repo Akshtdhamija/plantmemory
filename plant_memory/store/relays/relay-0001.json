@@ -1,0 +1,57 @@
+{
+  "relay_id": "relay-0001",
+  "status": "open",
+  "title": "Night shift -> day shift: IDF bearing upgrade in progress",
+  "summary": "Induced-draft fan fitted with new bearings and tighter vibration alarms during the night shift. Two IDF-related lessons are flagged for re-confirmation; the rest of the knowledge base is unaffected. Please re-verify the flagged items before relying on them.",
+  "from_member": "night shift",
+  "to": "day shift",
+  "next_actions": [
+    "Re-confirm the two flagged IDF lessons once the fan is recommissioned.",
+    "Watch YFJ3_ZD1 / YFJ3_ZD2 against the new alarm limits for the first 48 hours."
+  ],
+  "context": {
+    "under_change": "idf_bearing_upgrade",
+    "flagged": [
+      {
+        "entry_id": "km-0003",
+        "title": "IDF high vibration from bearing wear",
+        "health": "review",
+        "confidence": 0.634,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "km-0008",
+        "title": "IDF motor current spike from downstream restriction",
+        "health": "review",
+        "confidence": 0.671,
+        "reasons": [
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      }
+    ],
+    "watch_tags": [
+      "YFJ3_ZD1",
+      "YFJ3_ZD2"
+    ],
+    "flagged_count": 2,
+    "corpus_size": 14
+  },
+  "observed_state": {
+    "branch": "main",
+    "head": "99cf4d0",
+    "dirty": true,
+    "timestamp": "2026-09-25T04:25:13+00:00"
+  },
+  "created_at": "2026-09-25T04:25:13+00:00",
+  "taken_by": "",
+  "taken_at": "",
+  "closed_at": "",
+  "log": [
+    "2026-09-25T04:25:13+00:00 created by night shift"
+  ]
+}

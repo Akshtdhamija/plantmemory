@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plantmemory"
+version = "0.2.0"
+description = "A knowledge-continuity and Management-of-Change layer for computational plant operation."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Akshat Dhamija" }]
+keywords = [
+  "process-safety", "management-of-change", "moc",
+  "knowledge-management", "drift-detection", "chemical-engineering",
+]
+dependencies = ["pyyaml>=5.4"]
+
+[project.optional-dependencies]
+dev = ["duckdb>=0.9", "matplotlib>=3.5", "numpy>=1.22"]
+
+[project.scripts]
+plantmemory = "plant_memory.launch:main"
+
+[tool.setuptools]
+packages = ["plant_memory"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+plant_memory = ["hub_static/*", "store/**/*"]

@@ -1,0 +1,309 @@
+{
+  "corpus_size": 15,
+  "scenarios": [
+    {
+      "name": "kpi_rerate",
+      "kind": "recalibration",
+      "description": "Steam-temperature KPI re-rated (band 525\u2013540 \u00b0C, Hi alarm 543 \u00b0C) for a new steam contract.",
+      "total": 15,
+      "intact": 12,
+      "review": 3,
+      "broken": 0,
+      "flagged": 3,
+      "retained_fraction": 0.8,
+      "flagged_entries": [
+        "km-0001",
+        "km-0002",
+        "km-0012"
+      ]
+    },
+    {
+      "name": "idf_bearing_upgrade",
+      "kind": "upgrade",
+      "description": "IDF fitted with new bearings (tighter vibration alarm) and a VFD controller.",
+      "total": 15,
+      "intact": 13,
+      "review": 2,
+      "broken": 0,
+      "flagged": 2,
+      "retained_fraction": 0.867,
+      "flagged_entries": [
+        "km-0003",
+        "km-0008"
+      ]
+    },
+    {
+      "name": "o2_recal",
+      "kind": "recalibration",
+      "description": "Both flue-gas O2 analyzers recalibrated; Lo guardrail tightened to 2.5 %.",
+      "total": 15,
+      "intact": 14,
+      "review": 1,
+      "broken": 0,
+      "flagged": 1,
+      "retained_fraction": 0.933,
+      "flagged_entries": [
+        "km-0005"
+      ]
+    },
+    {
+      "name": "new_feedstock",
+      "kind": "distribution",
+      "description": "New coal blend shifts the operating distribution of steam temperature and load.",
+      "total": 15,
+      "intact": 14,
+      "review": 1,
+      "broken": 0,
+      "flagged": 1,
+      "retained_fraction": 0.933,
+      "flagged_entries": [
+        "km-0012"
+      ]
+    },
+    {
+      "name": "economizer_replacement",
+      "kind": "upgrade",
+      "description": "Economizer replaced with a finned upgrade; flue-gas path re-plumbed.",
+      "total": 15,
+      "intact": 14,
+      "review": 1,
+      "broken": 0,
+      "flagged": 1,
+      "retained_fraction": 0.933,
+      "flagged_entries": [
+        "km-0004"
+      ]
+    },
+    {
+      "name": "drum_setpoint_retune",
+      "kind": "setpoint",
+      "description": "Steam-drum HiHi pressure setpoint retuned to 10.6 MPa.",
+      "total": 15,
+      "intact": 14,
+      "review": 1,
+      "broken": 0,
+      "flagged": 1,
+      "retained_fraction": 0.933,
+      "flagged_entries": [
+        "km-0010"
+      ]
+    },
+    {
+      "name": "sensor_decommission",
+      "kind": "removal",
+      "description": "Furnace-pressure point PT_8313D retired during a DCS migration.",
+      "total": 15,
+      "intact": 14,
+      "review": 0,
+      "broken": 1,
+      "flagged": 1,
+      "retained_fraction": 0.933,
+      "flagged_entries": [
+        "km-0006"
+      ]
+    }
+  ],
+  "cost_model": {
+    "scenarios": 7,
+    "corpus_size": 15,
+    "cost_per_item": 1.0,
+    "relearn_from_scratch_cost": 105.0,
+    "targeted_revalidation_cost": 10.0,
+    "absolute_savings": 95.0,
+    "savings_fraction": 0.905,
+    "avg_retained_fraction": 0.905
+  },
+  "drift_matrix": {
+    "scenarios": [
+      "kpi_rerate",
+      "idf_bearing_upgrade",
+      "o2_recal",
+      "new_feedstock",
+      "economizer_replacement",
+      "drum_setpoint_retune",
+      "sensor_decommission"
+    ],
+    "entries": {
+      "km-0001": {
+        "title": "High steam temperature from desuperheater spray valve sticking",
+        "row": {
+          "kpi_rerate": "review",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0002": {
+        "title": "Low steam temperature from excess desuperheating during load swings",
+        "row": {
+          "kpi_rerate": "review",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0003": {
+        "title": "IDF high vibration from bearing wear",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "review",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0004": {
+        "title": "Backpass fouling signalled by rising economizer flue-gas outlet temperature",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "review",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0005": {
+        "title": "Low flue-gas O2 indicates incomplete combustion risk",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "review",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0006": {
+        "title": "Furnace draft instability from draft-control coupling",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "broken"
+        }
+      },
+      "km-0007": {
+        "title": "Cyclone separator \u0394P loss indicates solids carryover",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0008": {
+        "title": "IDF motor current spike from downstream restriction",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "review",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0009": {
+        "title": "Low primary air flow degrades bed fluidization",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0010": {
+        "title": "Steam drum pressure high-high precedes safety-valve lift",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "review",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0011": {
+        "title": "Hearth differential pressure tracks bed inventory",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0012": {
+        "title": "ML anomaly model baseline assumes March steady-state distribution",
+        "row": {
+          "kpi_rerate": "review",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "review",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0013": {
+        "title": "Secondary air preheater outlet temperature bounds combustion-air quality",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0014": {
+        "title": "Return-air chamber flow imbalance stresses one furnace side",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      },
+      "km-0015": {
+        "title": "Cold-end air preheater fouling shows as a widening flue-gas / air temperature gap",
+        "row": {
+          "kpi_rerate": "intact",
+          "idf_bearing_upgrade": "intact",
+          "o2_recal": "intact",
+          "new_feedstock": "intact",
+          "economizer_replacement": "intact",
+          "drum_setpoint_retune": "intact",
+          "sensor_decommission": "intact"
+        }
+      }
+    }
+  }
+}
