@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main, final-phase]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -r requirements.txt matplotlib pytest
+      - name: Tests (locality, replay, RIK, propagation, confidence, audit chain)
+        run: python -m pytest -q tests
+      - name: Experiments E1-E4, E6-E8 run from a clean clone
+        run: python -m plant_memory.experiments E1 E2 E3 E4 E6 E7 E8
+      - name: Hub starts and serves the MOC assessment
+        run: |
+          python -m plant_memory hub --no-open --port 7700 &
+          sleep 8
+          curl -sf "http://127.0.0.1:7700/api/moc/assess?scenario=kpi_rerate" | python -c "import sys,json; d=json.load(sys.stdin); assert d['risk']['tier']; print('tier', d['risk']['tier'])"

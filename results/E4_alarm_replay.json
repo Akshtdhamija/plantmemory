@@ -1,0 +1,137 @@
+{
+  "replay_total": 6005,
+  "logged_total": 6005,
+  "per_alarm_mismatches": 0,
+  "cases": {
+    "kpi_rerate": {
+      "rows": [
+        {
+          "tag": "TE_8332A",
+          "level": "Hi",
+          "old": 548.0,
+          "new": 543.0,
+          "activations_before": 5,
+          "activations_after": 55,
+          "active_h_before": 0.77,
+          "active_h_after": 29.98,
+          "margin_sigma_before": 0.33,
+          "margin_sigma_after": -0.83
+        }
+      ],
+      "standing_h_before": 0.77,
+      "standing_h_after": 29.98,
+      "min_margin_after": -0.83,
+      "limit_inside_envelope": [
+        "TE_8332A.Hi"
+      ],
+      "total_before": 24,
+      "total_after": 74,
+      "per_day_before": 4.8,
+      "per_day_after": 14.8,
+      "flood_before": 0,
+      "flood_after": 0
+    },
+    "idf_bearing_upgrade": {
+      "rows": [
+        {
+          "tag": "YFJ3_ZD1",
+          "level": "Alarm",
+          "old": 4.5,
+          "new": 3.8,
+          "activations_before": 164,
+          "activations_after": 41,
+          "active_h_before": 119.71,
+          "active_h_after": 119.94,
+          "margin_sigma_before": -4.85,
+          "margin_sigma_after": -6.08
+        },
+        {
+          "tag": "YFJ3_ZD2",
+          "level": "Alarm",
+          "old": 4.5,
+          "new": 3.8,
+          "activations_before": 2444,
+          "activations_after": 229,
+          "active_h_before": 116.04,
+          "active_h_after": 119.67,
+          "margin_sigma_before": -4.24,
+          "margin_sigma_after": -4.6
+        }
+      ],
+      "standing_h_before": 235.75,
+      "standing_h_after": 239.61,
+      "min_margin_after": -6.08,
+      "limit_inside_envelope": [],
+      "total_before": 4951,
+      "total_after": 2613,
+      "per_day_before": 990.2,
+      "per_day_after": 522.6,
+      "flood_before": 1454,
+      "flood_after": 466
+    },
+    "o2_recal": {
+      "rows": [
+        {
+          "tag": "AIR_8301A",
+          "level": "Lo",
+          "old": 2.0,
+          "new": 2.5,
+          "activations_before": 115,
+          "activations_after": 25,
+          "active_h_before": 91.49,
+          "active_h_after": 117.07,
+          "margin_sigma_before": -2.17,
+          "margin_sigma_after": -3.66
+        },
+        {
+          "tag": "AIR_8301B",
+          "level": "Lo",
+          "old": 2.0,
+          "new": 2.5,
+          "activations_before": 165,
+          "activations_after": 53,
+          "active_h_before": 68.29,
+          "active_h_after": 112.55,
+          "margin_sigma_before": -1.71,
+          "margin_sigma_after": -3.01
+        }
+      ],
+      "standing_h_before": 159.78,
+      "standing_h_after": 229.62,
+      "min_margin_after": -3.66,
+      "limit_inside_envelope": [],
+      "total_before": 350,
+      "total_after": 148,
+      "per_day_before": 70.0,
+      "per_day_after": 29.6,
+      "flood_before": 2,
+      "flood_after": 0
+    },
+    "drum_setpoint_retune": {
+      "rows": [
+        {
+          "tag": "PTCA_8322A",
+          "level": "HiHi",
+          "old": 10.5,
+          "new": 10.6,
+          "activations_before": 0,
+          "activations_after": 0,
+          "active_h_before": 0.0,
+          "active_h_after": 0.0,
+          "margin_sigma_before": 7.6,
+          "margin_sigma_after": 8.93
+        }
+      ],
+      "standing_h_before": 0.0,
+      "standing_h_after": 0.0,
+      "min_margin_after": 8.93,
+      "limit_inside_envelope": [],
+      "total_before": 0,
+      "total_after": 0,
+      "per_day_before": 0.0,
+      "per_day_after": 0.0,
+      "flood_before": 0,
+      "flood_after": 0
+    }
+  }
+}

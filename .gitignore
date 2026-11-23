@@ -16,8 +16,9 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Large source historian (not needed at runtime; stats cache is bundled)
+# Plant databases are bundled only under data/ (for reproducible experiments)
 *.duckdb
+!data/*.duckdb
 
 # Local env
 .env

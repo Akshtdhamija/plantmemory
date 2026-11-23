@@ -152,6 +152,21 @@ def _s_drum_setpoint_retune(state):
     return state
 
 
+def _s_o2_analyzer_bias(state):
+    # Left O2 analyser recalibrated with a +10 % span error: limits untouched,
+    # but the measured operating distribution moves.
+    shift_distribution(state, "AIR_8301A", mean_factor=1.10)
+    return state
+
+
+def _s_idf_bearing_rik(state):
+    # Like-for-like IDF bearing swap: same spec, same alarm limits, same wiring.
+    # Nothing a fingerprint can see changes, so it is provably replacement-in-kind.
+    sp = dict(state.setpoints.get("YFJ3_ZD1", {}))
+    retune_setpoint(state, "YFJ3_ZD1", "Alarm", sp.get("Alarm", 4.5))
+    return state
+
+
 def _s_sensor_decommission(state):
     # A furnace-pressure point retired during a DCS migration.
     remove_tag(state, "PT_8313D")
@@ -200,7 +215,7 @@ SCENARIOS: dict[str, Scenario] = {
         "Steam-drum HiHi pressure setpoint retuned to 10.6 MPa.",
         _s_drum_setpoint_retune,
         [("tag", "PTCA_8322A", "setpoints")],
-        moc_object="organisational", moc_class="Safety-limit / procedure change",
+        moc_object="material", moc_class="Safe-operating-limit change",
     ),
     "sensor_decommission": Scenario(
         "sensor_decommission", "removal",
@@ -208,6 +223,20 @@ SCENARIOS: dict[str, Scenario] = {
         _s_sensor_decommission,
         [("tag", "PT_8313D", "presence")],
         moc_object="material", moc_class="Instrument decommissioning",
+    ),
+    "o2_analyzer_bias": Scenario(
+        "o2_analyzer_bias", "distribution",
+        "Left flue-gas O2 analyser recalibrated with a +10 % span error (limits unchanged).",
+        _s_o2_analyzer_bias,
+        [("tag", "AIR_8301A", "distribution")],
+        moc_object="material", moc_class="Instrument recalibration",
+    ),
+    "idf_bearing_rik": Scenario(
+        "idf_bearing_rik", "replacement",
+        "IDF bearing replaced like-for-like (same specification, limits and wiring).",
+        _s_idf_bearing_rik,
+        [],
+        moc_object="material", moc_class="Replacement in kind",
     ),
 }
 

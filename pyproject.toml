@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "plantmemory"
-version = "0.2.0"
-description = "A knowledge-continuity and Management-of-Change layer for computational plant operation."
+version = "1.0.0"
+description = "Computable Management of Change for computational chemical plants: grounded knowledge, change-impact propagation, risk tiering, alarm replay and change verification."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -14,10 +14,10 @@ keywords = [
   "process-safety", "management-of-change", "moc",
   "knowledge-management", "drift-detection", "chemical-engineering",
 ]
-dependencies = ["pyyaml>=5.4"]
+dependencies = ["pyyaml>=5.4", "numpy>=1.22", "scipy>=1.8", "duckdb>=0.9"]
 
 [project.optional-dependencies]
-dev = ["duckdb>=0.9", "matplotlib>=3.5", "numpy>=1.22"]
+dev = ["matplotlib>=3.5", "pytest>=7"]
 
 [project.scripts]
 plantmemory = "plant_memory.launch:main"
@@ -28,3 +28,7 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 plant_memory = ["hub_static/*", "store/**/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

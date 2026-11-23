@@ -1,0 +1,86 @@
+{
+  "N": 59,
+  "scenarios": 9,
+  "null_false_positives": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "rows": [
+    {
+      "scenario": "kpi_rerate",
+      "flagged": 14,
+      "review": 14,
+      "broken": 0,
+      "retained": 0.7627118644067796,
+      "truth": 14
+    },
+    {
+      "scenario": "idf_bearing_upgrade",
+      "flagged": 14,
+      "review": 14,
+      "broken": 0,
+      "retained": 0.7627118644067796,
+      "truth": 14
+    },
+    {
+      "scenario": "o2_recal",
+      "flagged": 11,
+      "review": 11,
+      "broken": 0,
+      "retained": 0.8135593220338984,
+      "truth": 11
+    },
+    {
+      "scenario": "new_feedstock",
+      "flagged": 4,
+      "review": 4,
+      "broken": 0,
+      "retained": 0.9322033898305084,
+      "truth": 4
+    },
+    {
+      "scenario": "economizer_replacement",
+      "flagged": 11,
+      "review": 11,
+      "broken": 0,
+      "retained": 0.8135593220338984,
+      "truth": 11
+    },
+    {
+      "scenario": "drum_setpoint_retune",
+      "flagged": 5,
+      "review": 5,
+      "broken": 0,
+      "retained": 0.9152542372881356,
+      "truth": 5
+    },
+    {
+      "scenario": "sensor_decommission",
+      "flagged": 7,
+      "review": 0,
+      "broken": 7,
+      "retained": 0.8813559322033898,
+      "truth": 7
+    },
+    {
+      "scenario": "o2_analyzer_bias",
+      "flagged": 3,
+      "review": 3,
+      "broken": 0,
+      "retained": 0.9491525423728814,
+      "truth": 3
+    },
+    {
+      "scenario": "idf_bearing_rik",
+      "flagged": 0,
+      "review": 0,
+      "broken": 0,
+      "retained": 1.0,
+      "truth": 0
+    }
+  ],
+  "mean_retained": 0.8700564971751413,
+  "mean_retained_real_changes": 0.853813559322034,
+  "relearn_cost": 531,
+  "targeted_cost": 69,
+  "saving": 0.8700564971751412
+}

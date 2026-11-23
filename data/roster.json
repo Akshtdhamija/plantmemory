@@ -1,0 +1,17 @@
+{
+  "note": "SYNTHETIC roster for the organisational-change study. Roles, seniority and system familiarity are realistic for a CFB boiler unit but invented; no real people are represented.",
+  "people": [
+    {"id": "P01", "role": "Senior Shift Engineer (A)", "years": 22, "systems": ["primary_air_system", "secondary_air_system", "combustion_system", "flue_gas_system", "draft_system", "steam_water_system"], "owns_doc_types": []},
+    {"id": "P02", "role": "Shift Engineer (B)", "years": 9, "systems": ["combustion_system", "draft_system"], "owns_doc_types": []},
+    {"id": "P03", "role": "Shift Engineer (C)", "years": 6, "systems": ["steam_water_system", "primary_air_system", "secondary_air_system"], "owns_doc_types": []},
+    {"id": "P04", "role": "Shift Engineer (D, junior)", "years": 1, "systems": ["steam_water_system"], "owns_doc_types": []},
+    {"id": "P05", "role": "Process Engineer, Combustion and Air", "years": 11, "systems": ["combustion_system", "primary_air_system", "secondary_air_system"], "owns_doc_types": ["troubleshooting"]},
+    {"id": "P06", "role": "Process Engineer, Steam and Water", "years": 4, "systems": ["steam_water_system"], "owns_doc_types": []},
+    {"id": "P07", "role": "Control and Instrumentation Engineer", "years": 8, "systems": ["draft_system", "steam_water_system", "combustion_system"], "owns_doc_types": ["controls"]},
+    {"id": "P08", "role": "Instrument Technician", "years": 3, "systems": ["flue_gas_system"], "owns_doc_types": []},
+    {"id": "P09", "role": "Maintenance Planner, Rotating Equipment", "years": 12, "systems": ["draft_system", "primary_air_system", "secondary_air_system"], "owns_doc_types": ["maintenance", "datasheet"]},
+    {"id": "P10", "role": "Process Safety Lead", "years": 15, "systems": ["steam_water_system"], "owns_doc_types": ["safety"]},
+    {"id": "P11", "role": "Process Monitoring Model Owner", "years": 3, "systems": [], "owns_doc_types": []},
+    {"id": "P12", "role": "Operations Superintendent", "years": 20, "systems": ["steam_water_system", "combustion_system"], "owns_doc_types": ["sop"]}
+  ]
+}
