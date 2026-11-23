@@ -52,7 +52,15 @@ async function boot() {
   scenSel.innerHTML = `<option value="">— none (current plant state) —</option>` +
     state.scenarios.map(s => `<option value="${s.name}">${esc(s.description)}</option>`).join('');
   updatePills();
-  go('overview');
+  // Deep links: ?view=moc&scenario=kpi_rerate opens a specific assessment.
+  const qs = new URLSearchParams(state.booted ? '' : location.search);
+  state.booted = true;
+  const v0 = qs.get('view'), s0 = qs.get('scenario');
+  if (s0) state.scenario = s0;
+  scenSel.value = state.scenario || '';
+  const target = v0 && TITLES[v0] ? v0 : (state.view && TITLES[state.view] ? state.view : 'overview');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === target));
+  go(target);
 }
 function updatePills() {
   const pi = document.getElementById('pill-inbox'), pr = document.getElementById('pill-relays');
@@ -379,7 +387,7 @@ async function renderMOC() {
     const rec = a.recommendation || {};
     const rows = (a.impacted || []).map(x => `
       <div class="reason" style="display:flex;justify-content:space-between;gap:10px;align-items:center">
-        <span>${badge(x.health)} ${esc(x.title)}</span>
+        <span style="flex:1;text-align:left">${badge(x.health)} ${esc(x.title)}</span>
         <span class="dim" style="font-size:12px;white-space:nowrap">conf ${x.confidence_before ?? '—'} → <b style="color:var(--review)">${x.confidence_after ?? '—'}</b></span>
       </div>`).join('');
     requestHtml = `
@@ -396,44 +404,102 @@ async function renderMOC() {
         </div>
         ${rows ? `<div class="reasons" style="margin-top:12px">${rows}</div>` : `<p class="muted" style="font-size:13px;margin-top:10px">No encoded knowledge depends on what this change touches.</p>`}
         <div class="assess-rec rec-${esc(rec.level)}">${esc(rec.text || '')}</div>
+        ${mocDetail(a)}
         <div class="actions"><button class="btn" id="moc-raise">Raise MOC record →</button></div>
       </div>`;
   }
 
   const recCards = (reg.records || []).map(mocCard).join('');
+  const audit = reg.audit || {};
+  const od = (reg.overdue || []).map(o => `<div class="reason br">${esc(o.moc_id)}: ${esc(o.why)}</div>`).join('');
+  const people = (await API('/api/org')).people || [];
   view.innerHTML = intro + requestHtml +
-    `<div class="section-title">MOC register</div>
-     <div id="moclist">${recCards || `<div class="empty">No change records yet. Raise one from a selected change above.</div>`}</div>`;
+    `<div class="section-title">MOC register
+       <span class="dim" style="font-size:12px;font-weight:400;margin-left:8px">audit chain: ${audit.ok ? `<b style="color:var(--intact)">intact</b> (${audit.entries} entries)` : `<b style="color:var(--broken)">BROKEN at ${audit.broken_at}</b>`}</span></div>
+     ${od ? `<div class="card" style="margin-bottom:10px"><div class="reasons">${od}</div></div>` : ''}
+     <div id="moclist">${recCards || `<div class="empty">No change records yet. Raise one from a selected change above.</div>`}</div>
+     <div class="grid cols-2" style="margin-top:18px">
+       <div class="card"><h3>Organisational change</h3>
+         <p class="muted" style="font-size:13px">Who can still re-validate knowledge if a person leaves?</p>
+         <select id="org-person"><option value="">choose a person…</option>${people.map(p => `<option value="${p.id}">${esc(p.id)} ${esc(p.role)} (${p.years} y)</option>`).join('')}</select>
+         <div id="org-out" style="margin-top:10px"></div></div>
+       <div class="card"><h3>Changes without MOC</h3>
+         <p class="muted" style="font-size:13px">Persistent shifts in the historian with no approved MOC behind them (wander-normalised detector, c = 3).</p>
+         <button class="btn sm" id="scan-btn">Scan the historian</button><div id="scan-out" style="margin-top:10px"></div></div>
+     </div>`;
 
   const raise = document.getElementById('moc-raise');
   if (raise) raise.onclick = async () => {
     await API('/api/moc/raise', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario: scen, by: 'engineer' }) });
     toast('MOC record raised'); await boot(); go('moc');
   };
+  document.getElementById('org-person').onchange = async (ev) => {
+    const out = document.getElementById('org-out');
+    if (!ev.target.value) { out.innerHTML = ''; return; }
+    out.innerHTML = `<span class="spinner"></span>`;
+    const r = (await API('/api/org?person=' + ev.target.value)).assessment;
+    out.innerHTML = `<div class="meta"><span class="badge ${r.orphaned_entries.length ? 'b-broken' : 'b-intact'}"><span class="dot"></span>${r.orphaned_entries.length} entries left with no qualified reviewer</span>
+        <span class="badge b-review"><span class="dot"></span>${r.assets_exposed.length} assets lose coverage</span></div>
+      <div class="reasons">${r.orphaned_entries.map(e => `<div class="reason br">${esc(e.title)} → train ${esc(e.train.join(', ') || 'nobody qualified')}</div>`).join('')}
+      ${r.assets_exposed.slice(0, 5).map(x => `<div class="reason">${esc(x.asset)}: coverage ${x.coverage_before} → ${x.coverage_after} (KRI ${x.KRI})</div>`).join('')}</div>`;
+  };
+  document.getElementById('scan-btn').onclick = async () => {
+    const out = document.getElementById('scan-out');
+    out.innerHTML = `<span class="spinner"></span> scanning 5 days × 30 tags…`;
+    const r = await API('/api/moc/unmanaged');
+    out.innerHTML = `<div class="meta"><span class="badge b-review"><span class="dot"></span>${r.detections} candidate changes on ${r.tags} tags, none covered by an approved MOC</span></div>
+      <div class="reasons">${r.by_tag.slice(0, 8).map(x => `<div class="reason">${esc(x.tag)}: ${x.count} detections (first ${esc(x.first.replace('T', ' '))})</div>`).join('')}</div>`;
+  };
   wireMOC();
+}
+function mocDetail(a) {
+  const r = a.risk || {};
+  const sec = (t, body) => body ? `<div class="section-title" style="margin:16px 0 6px">${t}</div>${body}` : '';
+  const risk = `<div class="grid cols-4" style="gap:10px">
+      <div class="card stat"><div class="val">${r.S}</div><div class="lbl">severity S</div></div>
+      <div class="card stat"><div class="val">${r.L}</div><div class="lbl">likelihood L</div></div>
+      <div class="card stat"><div class="val" style="color:var(--review)">${r.R}</div><div class="lbl">risk R = S × L</div></div>
+      <div class="card stat"><div class="val" style="font-size:17px">${esc(r.tier)}</div><div class="lbl">MOC tier${a.pssr_required ? ' · PSSR required' : ''}</div></div></div>
+    <div class="reasons" style="margin-top:8px">${(r.severity_from || []).map(s => `<div class="reason">S: ${esc(s)}</div>`).join('')}${(r.likelihood_from || []).map(s => `<div class="reason">L: ${esc(s)}</div>`).join('')}</div>
+    <div class="meta" style="margin-top:6px">${(a.approvers || []).map(p => `<span class="tag">sign-off: ${esc(p)}</span>`).join('')}</div>`;
+  const procs = (a.procedures || []).slice(0, 8).map(p => `<div class="reason">${esc(p.doc_id)} Rev ${esc(p.revision)} (${esc(p.type)})</div>`).join('');
+  const rp = a.alarm_replay;
+  const alarms = (a.alarms || []).map(x => `<div class="reason">${esc(x.alarm)} (${esc(x.priority)}): ${x.old} → ${x.new ?? 'removed'}</div>`).join('') +
+    (rp ? `<div class="assess-rec ${rp.limit_inside_envelope.length ? 'rec-action-required' : 'rec-review'}">Alarm replay over 5 days: activations ${rp.total_before} → ${rp.total_after}, standing time ${rp.standing_h_before} h → ${rp.standing_h_after} h, min margin ${rp.min_margin_after} σ${rp.limit_inside_envelope.length ? '. New limit lies inside the normal operating envelope.' : ''}</div>` : '');
+  const models = (a.models || []).map(m => `<div class="reason ${String(m.verdict).startsWith('broken') ? 'br' : ''}">${esc(m.model)}: ${esc(m.verdict)}</div>`).join('');
+  const phys = (a.physical || []).slice(0, 6).map(p => `<div class="reason">${esc(p.asset)} (${p.score}): ${esc(p.path.join(' → '))}</div>`).join('');
+  return sec('Risk and approvals', risk) +
+    sec(`Procedures to revise (${(a.procedures || []).length})`, procs ? `<div class="reasons">${procs}</div>` : '') +
+    sec('Alarm limits', alarms ? `<div class="reasons">${alarms}</div>` : '') +
+    sec('Models', models ? `<div class="reasons">${models}</div>` : '') +
+    sec(`Physical propagation (${a.n_disturbed || 0} assets disturbed)`, phys ? `<div class="reasons">${phys}</div>` : '');
 }
 function mocCard(r) {
   const a = r.assessment || {};
+  const req = r.required_signoffs || [];
+  const signed = req.filter(x => (r.signoffs || {})[x]?.decision === 'approved').length;
+  const next = { in_review: ['approve', 'Approve (all roles)'], approved: ['implement', 'Mark implemented'],
+    implemented: ['pssr', 'Complete PSSR'], pssr_complete: ['verify', 'Verify against plant data'],
+    verified: ['close', 'Close MOC'] }[r.status];
   return `<div class="prop" data-id="${r.moc_id}">
-    <div class="ph"><div><b>${esc(r.title)}</b> <span class="dim">· ${esc(r.moc_id)}</span></div><span class="status-${r.status}">${esc(r.status)}</span></div>
-    <div class="meta" style="margin:8px 0">${mocObjBadge(r.moc_object)}<span class="tag">${esc(r.moc_class)}</span>
-      ${a.impacted_count ? `<span class="badge b-review"><span class="dot"></span>${a.impacted_count} affected</span>` : `<span class="badge b-intact"><span class="dot"></span>no impact</span>`}
-      ${r.decided_by ? `<span class="dim" style="font-size:12px">by ${esc(r.decided_by)}</span>` : ''}</div>
+    <div class="ph"><div><b>${esc(r.title)}</b> <span class="dim">· ${esc(r.moc_id)} · ${esc(r.type || 'permanent')}</span></div><span class="status-${r.status}">${esc((r.status || '').replace('_', ' '))}</span></div>
+    <div class="meta" style="margin:8px 0">${mocObjBadge(r.moc_object)}<span class="tag">${esc(r.moc_class)}</span><span class="tag">${esc(r.tier || '')}</span>
+      ${a.impacted_count ? `<span class="badge b-review"><span class="dot"></span>${a.impacted_count} knowledge, ${(a.procedures || []).length} procedures</span>` : `<span class="badge b-intact"><span class="dot"></span>no impact</span>`}
+      ${req.length ? `<span class="dim" style="font-size:12px">sign-offs ${signed}/${req.length}</span>` : ''}</div>
+    ${r.verification && r.verification.expected_and_seen ? `<div class="reasons"><div class="reason">verified: expected and seen ${esc(r.verification.expected_and_seen.join(', ') || 'none')}; unanticipated ${esc(r.verification.unanticipated.join(', ') || 'none')}</div></div>` : ''}
     <div class="actions">
-      ${r.status === 'open' ? `<button class="btn sm" data-approve>Approve change</button><button class="btn ghost sm" data-reject>Reject</button>` : ''}
+      ${next ? `<button class="btn sm" data-step="${next[0]}">${next[1]}</button>` : ''}
+      ${r.status === 'in_review' ? `<button class="btn ghost sm" data-step="reject">Reject</button>` : ''}
+      <a class="btn ghost sm" href="/api/moc/${r.moc_id}/package" target="_blank">MOC package</a>
     </div></div>`;
 }
 function wireMOC() {
-  view.querySelectorAll('.prop').forEach(pc => {
+  view.querySelectorAll('#moclist .prop').forEach(pc => {
     const id = pc.dataset.id;
-    pc.querySelector('[data-approve]')?.addEventListener('click', async () => {
-      await API(`/api/moc/${id}/approve`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: 'approver' }) });
-      toast('Change authorised'); await boot(); go('moc');
-    });
-    pc.querySelector('[data-reject]')?.addEventListener('click', async () => {
-      await API(`/api/moc/${id}/reject`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: 'approver' }) });
-      toast('Change rejected'); await boot(); go('moc');
-    });
+    pc.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', async () => {
+      const r = await API(`/api/moc/${id}/${b.dataset.step}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ by: 'approver' }) });
+      toast(r.error ? r.error : `${id}: ${r.moc.status.replace('_', ' ')}`); await boot(); go('moc');
+    }));
   });
 }
 

@@ -53,7 +53,7 @@ def api_overview(scenario=None):
                       for n, sc in SCENARIOS.items()],
         "pending_proposals": len(inbox.list_proposals("pending")),
         "open_relays": len(relay.list_relays("open")),
-        "open_moc": len(moc.list_moc("open")),
+        "open_moc": len(moc.list_moc("in_review")),
         "categories": _category_counts(entries),
     }
 
@@ -67,7 +67,33 @@ def api_moc_assess(scenario=None):
 
 def api_moc_list():
     from . import moc
-    return {"records": moc.list_moc()}
+    return {"records": moc.list_moc(), "overdue": moc.overdue(), "audit": moc.verify_audit()}
+
+
+def api_org(person=None):
+    from . import org, plantdata
+    people = plantdata.roster()
+    if not person:
+        return {"people": people}
+    return {"people": people, "assessment": org.assess_departure(person)}
+
+
+_SCAN_CACHE = {}
+
+
+def api_unmanaged():
+    """Changes the detector sees in the historian, matched against approved MOCs."""
+    if "scan" not in _SCAN_CACHE:
+        from . import unmanaged
+        hits = unmanaged.scan()
+        by_tag = {}
+        for h in hits:
+            by_tag.setdefault(h["tag"], []).append(h["time"])
+        _SCAN_CACHE["scan"] = {"detections": len(hits), "tags": len(by_tag),
+                               "by_tag": sorted(({"tag": t, "count": len(v), "first": v[0]}
+                                                 for t, v in by_tag.items()),
+                                                key=lambda x: -x["count"])}
+    return _SCAN_CACHE["scan"]
 
 
 def _category_counts(entries):
@@ -261,6 +287,15 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(api_moc_assess(scen))
             if u.path == "/api/moc":
                 return self._send(api_moc_list())
+            if u.path == "/api/org":
+                return self._send(api_org(q.get("person", [None])[0]))
+            if u.path == "/api/moc/unmanaged":
+                return self._send(api_unmanaged())
+            if u.path.startswith("/api/moc/") and u.path.endswith("/package"):
+                from . import moc
+                p = moc.export_package(u.path.split("/")[3])
+                with open(p, encoding="utf-8") as f:
+                    return self._send(f.read().encode("utf-8"), 200, "text/markdown; charset=utf-8")
             return self._send({"error": "unknown route"}, 404)
         except Exception as exc:
             import traceback
@@ -308,6 +343,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send({"ok": True, "moc": moc.decide_moc(
                     mid, decision="rejected", approver=data.get("by", "approver"),
                     note=data.get("note", ""))})
+            steps = {"implement": moc.implement, "pssr": moc.complete_pssr,
+                     "verify": moc.verify_change, "close": moc.close_moc}
+            if u.path.startswith("/api/moc/") and u.path.rsplit("/", 1)[-1] in steps:
+                mid, step = u.path.split("/")[3], u.path.rsplit("/", 1)[-1]
+                return self._send({"ok": True, "moc": steps[step](mid)})
             return self._send({"error": "unknown route"}, 404)
         except Exception as exc:
             return self._send({"error": str(exc)}, 500)
