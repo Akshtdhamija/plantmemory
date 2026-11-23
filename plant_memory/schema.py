@@ -60,6 +60,8 @@ CATEGORIES = (
     "corrective_action",  # what to do about a condition
     "convention",         # operating convention / rule of thumb
     "decision",           # a recorded engineering decision
+    "procedure",          # documented procedure knowledge (from the plant library)
+    "design_basis",       # equipment design / datasheet basis
 )
 
 
