@@ -1,55 +1,71 @@
 {
   "moc_id": "moc-0001",
-  "status": "open",
-  "title": "IDF fitted with new bearings (tighter vibration alarm) and a VFD controller.",
-  "scenario": "idf_bearing_upgrade",
+  "status": "closed",
+  "type": "permanent",
+  "title": "IDF bearing replaced like-for-like (same specification, limits and wiring).",
+  "scenario": "idf_bearing_rik",
   "moc_object": "material",
-  "moc_class": "Equipment modification",
-  "originator": "night shift",
-  "reason": "Routine IDF bearing + VFD upgrade scheduled; raised for change authorisation.",
+  "moc_class": "Replacement in kind",
+  "originator": "P09",
+  "reason": "Like-for-like bearing swap at planned outage",
+  "tier": "Replacement in kind (exempt)",
+  "required_signoffs": [],
+  "signoffs": {},
+  "pssr": {},
+  "verification": null,
   "assessment": {
-    "scenario": "idf_bearing_upgrade",
+    "scenario": "idf_bearing_rik",
+    "description": "IDF bearing replaced like-for-like (same specification, limits and wiring).",
     "moc_object": "material",
-    "moc_class": "Equipment modification",
-    "kind": "upgrade",
-    "description": "IDF fitted with new bearings (tighter vibration alarm) and a VFD controller.",
-    "corpus_size": 14,
-    "impacted_count": 2,
+    "moc_class": "Replacement in kind",
+    "change_set": [],
+    "replacement_in_kind": true,
+    "knowledge": [],
+    "watch_knowledge": [],
+    "procedures": [],
+    "watch_procedures": [],
+    "alarms": [],
+    "watch_alarms": [],
+    "alarm_replay": null,
+    "models": [],
+    "reviewers": {},
+    "physical": [],
+    "n_disturbed": 0,
+    "risk": {
+      "S": 0,
+      "L": 0,
+      "R": 0,
+      "tier": "Replacement in kind (exempt)",
+      "severity_from": [
+        "no facet fingerprint moved"
+      ],
+      "likelihood_from": []
+    },
+    "approvers": [],
+    "pssr_required": false,
+    "corpus_size": 59,
+    "kind": "replacement",
+    "impacted": [],
+    "impacted_count": 0,
     "n_broken": 0,
-    "n_review": 2,
-    "unaffected": 12,
-    "impacted": [
-      {
-        "entry_id": "km-0008",
-        "title": "IDF motor current spike from downstream restriction",
-        "health": "review",
-        "confidence_before": 0.76,
-        "confidence_after": 0.671,
-        "reasons": [
-          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
-        ]
-      },
-      {
-        "entry_id": "km-0003",
-        "title": "IDF high vibration from bearing wear",
-        "health": "review",
-        "confidence_before": 0.88,
-        "confidence_after": 0.634,
-        "reasons": [
-          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
-          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
-          "identity/type of induced_draft_fan changed",
-          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
-        ]
-      }
-    ],
+    "n_review": 0,
+    "unaffected": 59,
     "recommendation": {
-      "level": "review",
-      "text": "2 knowledge item(s) must be re-confirmed against the new plant state. The rest of the corpus is unaffected and carries over."
+      "level": "clear",
+      "text": "Replacement in kind: no facet fingerprint moved. Exempt from MOC."
     }
   },
+  "expires_at": "",
+  "retro_review_due": "",
   "decided_by": "",
   "decision_note": "",
-  "created_at": "2026-11-18T04:14:20+00:00",
-  "decided_at": ""
+  "created_at": "2026-11-23T08:04:22+00:00",
+  "decided_at": "",
+  "history": [
+    {
+      "t": "2026-11-23T08:04:22+00:00",
+      "status": "closed",
+      "by": "P09"
+    }
+  ]
 }
