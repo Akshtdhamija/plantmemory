@@ -16,7 +16,7 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt matplotlib pytest
       - name: Tests (locality, replay, RIK, propagation, confidence, audit chain)
-        run: pytest -q tests
+        run: python -m pytest -q tests
       - name: Experiments E1-E4, E6-E8 run from a clean clone
         run: python -m plant_memory.experiments E1 E2 E3 E4 E6 E7 E8
       - name: Hub starts and serves the MOC assessment
