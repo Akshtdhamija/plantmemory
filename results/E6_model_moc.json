@@ -1,0 +1,89 @@
+{
+  "components": 10,
+  "inputs": 30,
+  "t2_limit": 23.334418947707977,
+  "spe_limit": 8.557133110984545,
+  "far_train_normal": 0.03932926829268293,
+  "far_heldout_normal": 0.053689262147570485,
+  "rows": [
+    {
+      "scenario": "kpi_rerate",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "idf_bearing_upgrade",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "o2_recal",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "new_feedstock",
+      "plantmemory": "revalidate",
+      "moved_inputs": [
+        "TE_8332A",
+        "ZZQBCHLL"
+      ],
+      "far": 1.0,
+      "inflation": 18.62569832402235,
+      "observed": "degraded"
+    },
+    {
+      "scenario": "economizer_replacement",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "drum_setpoint_retune",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "sensor_decommission",
+      "plantmemory": "broken (input removed)",
+      "moved_inputs": [
+        "PT_8313D"
+      ],
+      "far": null,
+      "inflation": null,
+      "observed": "inoperable"
+    },
+    {
+      "scenario": "o2_analyzer_bias",
+      "plantmemory": "revalidate",
+      "moved_inputs": [
+        "AIR_8301A"
+      ],
+      "far": 0.05818836232753449,
+      "inflation": 1.0837988826815643,
+      "observed": "unaffected"
+    },
+    {
+      "scenario": "idf_bearing_rik",
+      "plantmemory": "valid",
+      "moved_inputs": [],
+      "far": 0.053689262147570485,
+      "inflation": 1.0,
+      "observed": "unaffected"
+    }
+  ]
+}
