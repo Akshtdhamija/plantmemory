@@ -1,0 +1,1259 @@
+{
+  "moc_id": "moc-0002",
+  "status": "in_review",
+  "type": "permanent",
+  "title": "IDF fitted with new bearings (tighter vibration alarm) and a VFD controller.",
+  "scenario": "idf_bearing_upgrade",
+  "moc_object": "material",
+  "moc_class": "Equipment modification",
+  "originator": "P09",
+  "reason": "Bearing upgrade with tighter vibration alarm and VFD",
+  "tier": "Major",
+  "required_signoffs": [
+    "P05 Process Engineer, Combustion and Air",
+    "P07 Control and Instrumentation Engineer",
+    "P09 Maintenance Planner, Rotating Equipment",
+    "P12 Operations Superintendent",
+    "P10 Process Safety Lead"
+  ],
+  "signoffs": {},
+  "pssr": {
+    "Construction / installation is in accordance with the design specification": null,
+    "Safety, operating, maintenance and emergency procedures are in place and adequate": null,
+    "Process safety information (P&IDs, datasheets, setpoint register) is updated": null,
+    "Alarm limits and interlocks are configured as approved and tested": null,
+    "Affected personnel are trained and informed": null,
+    "Flagged knowledge has been re-validated by a qualified reviewer": null,
+    "Process-monitoring models with moved inputs are revalidated": null
+  },
+  "verification": null,
+  "assessment": {
+    "scenario": "idf_bearing_upgrade",
+    "description": "IDF fitted with new bearings (tighter vibration alarm) and a VFD controller.",
+    "moc_object": "material",
+    "moc_class": "Equipment modification",
+    "change_set": [
+      "tag:YFJ3_ZD1:setpoints",
+      "tag:YFJ3_ZD2:setpoints",
+      "kg_node:induced_draft_fan:presence",
+      "kg_node:induced_draft_fan:connections"
+    ],
+    "replacement_in_kind": false,
+    "knowledge": [
+      {
+        "id": "km-0003",
+        "title": "IDF high vibration from bearing wear",
+        "health": "review",
+        "conf_before": 0.88,
+        "conf_after": 0.634,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "km-0008",
+        "title": "IDF motor current spike from downstream restriction",
+        "health": "review",
+        "conf_before": 0.76,
+        "conf_after": 0.671,
+        "reasons": [
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-ctrl_alarm_setpoint_register",
+        "title": "Alarm and Trip Setpoint Register \u2014 All 30 Tags",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.838,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-ctrl_furnace_draft_loop",
+        "title": "Furnace Draft Control Loop \u2014 Description and Tuning",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.831,
+        "reasons": [
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-ctrl_instrument_calibration",
+        "title": "Instrument Calibration Schedule and Tolerance Limits",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.834,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-ds_induced_draft_fan",
+        "title": "Equipment Datasheet \u2014 Induced Draft Fan",
+        "health": "review",
+        "conf_before": 0.9,
+        "conf_after": 0.821,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-mnt_boiler_annual_outage",
+        "title": "Annual Outage Master Checklist",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.835,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-mnt_idf_bearing_inspection",
+        "title": "IDF Bearing Shell Inspection and Vibration Check",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.731,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-mnt_idf_blade_inspection",
+        "title": "IDF Fan Blade and Impeller Inspection",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.731,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-mnt_idf_motor_inspection",
+        "title": "IDF Motor Inspection and Current Check",
+        "health": "review",
+        "conf_before": 0.85,
+        "conf_after": 0.652,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "id": "kp-trb_high_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 High Furnace Pressure (Trending Positive)",
+        "health": "review",
+        "conf_before": 0.8,
+        "conf_after": 0.77,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "id": "kp-trb_idf_high_current",
+        "title": "Troubleshooting Guide \u2014 IDF Motor High Current",
+        "health": "review",
+        "conf_before": 0.8,
+        "conf_after": 0.707,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "id": "kp-trb_idf_high_vibration",
+        "title": "Troubleshooting Guide \u2014 IDF High Bearing Vibration",
+        "health": "review",
+        "conf_before": 0.8,
+        "conf_after": 0.707,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "id": "kp-trb_low_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 Excessive Furnace Negative Pressure / Draft Loss",
+        "health": "review",
+        "conf_before": 0.8,
+        "conf_after": 0.788,
+        "reasons": [
+          "identity/type of induced_draft_fan changed"
+        ]
+      }
+    ],
+    "watch_knowledge": [
+      {
+        "id": "kp-ds_stack_chimney",
+        "title": "Equipment Datasheet \u2014 Stack / Chimney",
+        "score": 0.7
+      },
+      {
+        "id": "km-0006",
+        "title": "Furnace draft instability from draft-control coupling",
+        "score": 0.6
+      },
+      {
+        "id": "kp-ds_cfb_furnace",
+        "title": "Equipment Datasheet \u2014 CFB Furnace (Lower Hearth and Upper Chamber)",
+        "score": 0.36
+      },
+      {
+        "id": "km-0004",
+        "title": "Backpass fouling signalled by rising economizer flue-gas outlet temperature",
+        "score": 0.35
+      },
+      {
+        "id": "kp-ctrl_combustion_air_o2_trim",
+        "title": "Combustion Air / O2 Trim Control Loop \u2014 Description and Tuning",
+        "score": 0.35
+      },
+      {
+        "id": "kp-ds_upper_economizer",
+        "title": "Equipment Datasheet \u2014 Upper Economizer",
+        "score": 0.35
+      },
+      {
+        "id": "kp-mnt_economizer_inspection",
+        "title": "Economizer Tube Inspection and Hydrotest",
+        "score": 0.35
+      },
+      {
+        "id": "kp-mnt_feedwater_pump_check",
+        "title": "Feedwater System Pre-Startup Check",
+        "score": 0.35
+      },
+      {
+        "id": "kp-trb_high_flue_gas_o2",
+        "title": "Troubleshooting Guide \u2014 High Flue Gas O2 (Over-Aeration)",
+        "score": 0.35
+      },
+      {
+        "id": "kp-trb_low_flue_gas_o2",
+        "title": "Troubleshooting Guide \u2014 Low Flue Gas O2 (Under-Aeration / CO Risk)",
+        "score": 0.35
+      },
+      {
+        "id": "kp-trb_steam_drum_level",
+        "title": "Troubleshooting Guide \u2014 Steam Drum Level Abnormal",
+        "score": 0.35
+      },
+      {
+        "id": "kp-trb_high_steam_temperature",
+        "title": "Troubleshooting Guide \u2014 High Steam Temperature (TE_8332A > 545\u00b0C)",
+        "score": 0.324
+      },
+      {
+        "id": "kp-trb_low_steam_temperature",
+        "title": "Troubleshooting Guide \u2014 Low Steam Temperature (TE_8332A < 530\u00b0C)",
+        "score": 0.324
+      },
+      {
+        "id": "km-0005",
+        "title": "Low flue-gas O2 indicates incomplete combustion risk",
+        "score": 0.315
+      },
+      {
+        "id": "kp-trb_bed_inventory_loss",
+        "title": "Troubleshooting Guide \u2014 Bed Inventory Loss",
+        "score": 0.315
+      }
+    ],
+    "procedures": [
+      {
+        "doc_id": "ctrl_alarm_setpoint_register",
+        "title": "Alarm and Trip Setpoint Register \u2014 All 30 Tags",
+        "type": "controls",
+        "revision": "4.2",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "ctrl_furnace_draft_loop",
+        "title": "Furnace Draft Control Loop \u2014 Description and Tuning",
+        "type": "controls",
+        "revision": "1.8",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "ctrl_instrument_calibration",
+        "title": "Instrument Calibration Schedule and Tolerance Limits",
+        "type": "controls",
+        "revision": "3.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "ds_induced_draft_fan",
+        "title": "Equipment Datasheet \u2014 Induced Draft Fan",
+        "type": "datasheet",
+        "revision": "1.5",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "mnt_boiler_annual_outage",
+        "title": "Annual Outage Master Checklist",
+        "type": "maintenance",
+        "revision": "3.1",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "mnt_idf_bearing_inspection",
+        "title": "IDF Bearing Shell Inspection and Vibration Check",
+        "type": "maintenance",
+        "revision": "2.1",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "mnt_idf_blade_inspection",
+        "title": "IDF Fan Blade and Impeller Inspection",
+        "type": "maintenance",
+        "revision": "1.4",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "mnt_idf_motor_inspection",
+        "title": "IDF Motor Inspection and Current Check",
+        "type": "maintenance",
+        "revision": "1.2",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "safe_emergency_response",
+        "title": "Boiler Emergency Response Plan",
+        "type": "safety",
+        "revision": "3.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "safe_loto_induced_draft_fan",
+        "title": "LOTO Procedure \u2014 Induced Draft Fan (YFJ3)",
+        "type": "safety",
+        "revision": "2.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "cold_start_procedure",
+        "title": "CFB Boiler Cold Start Procedure",
+        "type": "sop",
+        "revision": "3.2",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "daily_operator_rounds",
+        "title": "Daily Operator Rounds Checklist",
+        "type": "sop",
+        "revision": "5.1",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "emergency_shutdown_procedure",
+        "title": "Emergency Shutdown Procedure (ESD)",
+        "type": "sop",
+        "revision": "4.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "hot_restart_procedure",
+        "title": "Hot Restart Procedure \u2014 After Short Planned Outage",
+        "type": "sop",
+        "revision": "2.1",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "normal_shutdown_procedure",
+        "title": "Normal Planned Shutdown Procedure",
+        "type": "sop",
+        "revision": "2.4",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "pre_startup_safety_check",
+        "title": "Pre-Startup Safety Inspection Checklist",
+        "type": "sop",
+        "revision": "3.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "unit_load_change",
+        "title": "Unit Load Change / Ramping Procedure",
+        "type": "sop",
+        "revision": "1.8",
+        "because": [
+          "induced_draft_fan:connections",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "trb_low_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 Excessive Furnace Negative Pressure / Draft Loss",
+        "type": "troubleshooting",
+        "revision": "1.4",
+        "because": [
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "trb_high_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 High Furnace Pressure (Trending Positive)",
+        "type": "troubleshooting",
+        "revision": "2.0",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "trb_idf_high_vibration",
+        "title": "Troubleshooting Guide \u2014 IDF High Bearing Vibration",
+        "type": "troubleshooting",
+        "revision": "2.2",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:presence"
+        ]
+      },
+      {
+        "doc_id": "trb_idf_high_current",
+        "title": "Troubleshooting Guide \u2014 IDF Motor High Current",
+        "type": "troubleshooting",
+        "revision": "1.3",
+        "because": [
+          "YFJ3_ZD1:setpoints",
+          "YFJ3_ZD2:setpoints",
+          "induced_draft_fan:presence"
+        ]
+      }
+    ],
+    "watch_procedures": [
+      {
+        "doc_id": "ctrl_combustion_air_o2_trim",
+        "type": "controls",
+        "score": 0.35
+      },
+      {
+        "doc_id": "ds_cfb_furnace",
+        "type": "datasheet",
+        "score": 0.36
+      },
+      {
+        "doc_id": "ds_stack_chimney",
+        "type": "datasheet",
+        "score": 0.7
+      },
+      {
+        "doc_id": "ds_upper_economizer",
+        "type": "datasheet",
+        "score": 0.35
+      },
+      {
+        "doc_id": "mnt_economizer_inspection",
+        "type": "maintenance",
+        "score": 0.35
+      },
+      {
+        "doc_id": "mnt_feedwater_pump_check",
+        "type": "maintenance",
+        "score": 0.35
+      },
+      {
+        "doc_id": "safe_water_chemistry_specs",
+        "type": "safety",
+        "score": 0.35
+      },
+      {
+        "doc_id": "env_ash_disposal",
+        "type": "safety",
+        "score": 0.7
+      },
+      {
+        "doc_id": "safe_hot_work_permit",
+        "type": "safety",
+        "score": 0.324
+      },
+      {
+        "doc_id": "env_stack_emissions",
+        "type": "safety",
+        "score": 0.7
+      },
+      {
+        "doc_id": "trb_bed_inventory_loss",
+        "type": "troubleshooting",
+        "score": 0.315
+      },
+      {
+        "doc_id": "trb_high_flue_gas_o2",
+        "type": "troubleshooting",
+        "score": 0.35
+      },
+      {
+        "doc_id": "trb_high_steam_temperature",
+        "type": "troubleshooting",
+        "score": 0.324
+      },
+      {
+        "doc_id": "trb_low_flue_gas_o2",
+        "type": "troubleshooting",
+        "score": 0.35
+      },
+      {
+        "doc_id": "trb_low_steam_temperature",
+        "type": "troubleshooting",
+        "score": 0.324
+      },
+      {
+        "doc_id": "trb_steam_drum_level",
+        "type": "troubleshooting",
+        "score": 0.35
+      }
+    ],
+    "alarms": [
+      {
+        "alarm": "YFJ3_ZD2.Alarm",
+        "old": 4.5,
+        "new": 3.8,
+        "priority": "High"
+      },
+      {
+        "alarm": "YFJ3_ZD1.Alarm",
+        "old": 4.5,
+        "new": 3.8,
+        "priority": "High"
+      }
+    ],
+    "watch_alarms": [
+      {
+        "alarm": "YFJ3_AI.Alarm",
+        "priority": "High",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_AI.Trip",
+        "priority": "Critical",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD1.Alert",
+        "priority": "Low",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD1.Alarm",
+        "priority": "High",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD1.Trip",
+        "priority": "Critical",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD2.Alert",
+        "priority": "Low",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD2.Alarm",
+        "priority": "High",
+        "score": 0.9
+      },
+      {
+        "alarm": "YFJ3_ZD2.Trip",
+        "priority": "Critical",
+        "score": 0.9
+      },
+      {
+        "alarm": "PT_8313A.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313A.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313B.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313B.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313C.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313C.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313D.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313D.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313E.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313E.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313F.Hi",
+        "priority": "Medium",
+        "score": 0.36
+      },
+      {
+        "alarm": "PT_8313F.HiHi",
+        "priority": "High",
+        "score": 0.36
+      },
+      {
+        "alarm": "AIR_8301A.LoLo",
+        "priority": "Critical",
+        "score": 0.315
+      },
+      {
+        "alarm": "AIR_8301A.Lo",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "AIR_8301A.Hi",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "AIR_8301B.LoLo",
+        "priority": "Critical",
+        "score": 0.315
+      },
+      {
+        "alarm": "AIR_8301B.Lo",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "AIR_8301B.Hi",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319A.Lo",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319A.Hi",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319A.HiHi",
+        "priority": "High",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319B.Lo",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319B.Hi",
+        "priority": "Medium",
+        "score": 0.315
+      },
+      {
+        "alarm": "TE_8319B.HiHi",
+        "priority": "High",
+        "score": 0.315
+      }
+    ],
+    "alarm_replay": {
+      "rows": [
+        {
+          "tag": "YFJ3_ZD2",
+          "level": "Alarm",
+          "old": 4.5,
+          "new": 3.8,
+          "activations_before": 2444,
+          "activations_after": 229,
+          "active_h_before": 116.04,
+          "active_h_after": 119.67,
+          "margin_sigma_before": -4.24,
+          "margin_sigma_after": -4.6
+        },
+        {
+          "tag": "YFJ3_ZD1",
+          "level": "Alarm",
+          "old": 4.5,
+          "new": 3.8,
+          "activations_before": 164,
+          "activations_after": 41,
+          "active_h_before": 119.71,
+          "active_h_after": 119.94,
+          "margin_sigma_before": -4.85,
+          "margin_sigma_after": -6.08
+        }
+      ],
+      "standing_h_before": 235.75,
+      "standing_h_after": 239.61,
+      "min_margin_after": -6.08,
+      "limit_inside_envelope": [],
+      "total_before": 4951,
+      "total_after": 2613,
+      "per_day_before": 990.2,
+      "per_day_after": 522.6,
+      "flood_before": 1454,
+      "flood_after": 466
+    },
+    "models": [],
+    "reviewers": {
+      "km-0003": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "km-0008": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "kp-ctrl_alarm_setpoint_register": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P12"
+      ],
+      "kp-ctrl_furnace_draft_loop": [
+        "P01",
+        "P02",
+        "P05",
+        "P07",
+        "P09",
+        "P12"
+      ],
+      "kp-ctrl_instrument_calibration": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P12"
+      ],
+      "kp-ds_induced_draft_fan": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "kp-mnt_boiler_annual_outage": [
+        "P01",
+        "P02",
+        "P03",
+        "P05",
+        "P06",
+        "P07",
+        "P08",
+        "P09",
+        "P10",
+        "P12"
+      ],
+      "kp-mnt_idf_bearing_inspection": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "kp-mnt_idf_blade_inspection": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "kp-mnt_idf_motor_inspection": [
+        "P01",
+        "P02",
+        "P07",
+        "P09"
+      ],
+      "kp-trb_high_furnace_pressure": [
+        "P01",
+        "P02",
+        "P05",
+        "P07",
+        "P09",
+        "P12"
+      ],
+      "kp-trb_idf_high_current": [
+        "P01",
+        "P02",
+        "P05",
+        "P07",
+        "P09",
+        "P12"
+      ],
+      "kp-trb_idf_high_vibration": [
+        "P01",
+        "P02",
+        "P05",
+        "P07",
+        "P09",
+        "P12"
+      ],
+      "kp-trb_low_furnace_pressure": [
+        "P01",
+        "P02",
+        "P05",
+        "P07",
+        "P09",
+        "P12"
+      ]
+    },
+    "physical": [
+      {
+        "asset": "YFJ3_AI",
+        "score": 0.9,
+        "path": [
+          "Induced Draft Fan",
+          "YFJ3_AI \u2014 Induced draft fan motor current"
+        ]
+      },
+      {
+        "asset": "YFJ3_ZD1",
+        "score": 0.9,
+        "path": [
+          "Induced Draft Fan",
+          "YFJ3_ZD1 \u2014 Vibration of induced draft fan bearing shell (point A)"
+        ]
+      },
+      {
+        "asset": "YFJ3_ZD2",
+        "score": 0.9,
+        "path": [
+          "Induced Draft Fan",
+          "YFJ3_ZD2 \u2014 Vibration of induced draft fan bearing shell (point B)"
+        ]
+      },
+      {
+        "asset": "chimney",
+        "score": 0.7,
+        "path": [
+          "Induced Draft Fan",
+          "Stack / Chimney"
+        ]
+      },
+      {
+        "asset": "furnace_draft_control_loop",
+        "score": 0.6,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop"
+        ]
+      },
+      {
+        "asset": "PT_8313A",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313A \u2014 Upper furnace pressure (point A)"
+        ]
+      },
+      {
+        "asset": "PT_8313B",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313B \u2014 Upper furnace pressure (point B)"
+        ]
+      },
+      {
+        "asset": "PT_8313C",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313C \u2014 Upper furnace pressure (point C)"
+        ]
+      },
+      {
+        "asset": "PT_8313D",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313D \u2014 Upper furnace pressure (point D)"
+        ]
+      },
+      {
+        "asset": "PT_8313E",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313E \u2014 Upper furnace pressure (point E)"
+        ]
+      },
+      {
+        "asset": "PT_8313F",
+        "score": 0.36,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313F \u2014 Upper furnace pressure (point F)"
+        ]
+      },
+      {
+        "asset": "economizer",
+        "score": 0.35,
+        "path": [
+          "Induced Draft Fan",
+          "Upper Economizer"
+        ]
+      },
+      {
+        "asset": "furnace_chamber",
+        "score": 0.324,
+        "path": [
+          "Induced Draft Fan",
+          "Furnace Draft Control Loop",
+          "PT_8313A \u2014 Upper furnace pressure (point A)",
+          "Furnace Chamber (Upper)"
+        ]
+      },
+      {
+        "asset": "AIR_8301A",
+        "score": 0.315,
+        "path": [
+          "Induced Draft Fan",
+          "Upper Economizer",
+          "AIR_8301A \u2014 Upper economizer inlet flue gas oxygen content (left)"
+        ]
+      },
+      {
+        "asset": "AIR_8301B",
+        "score": 0.315,
+        "path": [
+          "Induced Draft Fan",
+          "Upper Economizer",
+          "AIR_8301B \u2014 Upper economizer inlet flue gas oxygen content (right)"
+        ]
+      }
+    ],
+    "n_disturbed": 17,
+    "risk": {
+      "S": 4,
+      "L": 3,
+      "R": 12,
+      "tier": "Major",
+      "severity_from": [
+        "disturbs YFJ3_ZD2 (score 0.90) with 5-level alarms",
+        "disturbs YFJ3_ZD1 (score 0.90) with 5-level alarms",
+        "disturbs YFJ3_AI (score 0.90) with 5-level alarms"
+      ],
+      "likelihood_from": [
+        "largest move = 1.23 sigma of operating spread",
+        "equipment rewired or re-identified"
+      ],
+      "z_max": 1.23
+    },
+    "approvers": [
+      "P05 Process Engineer, Combustion and Air",
+      "P07 Control and Instrumentation Engineer",
+      "P09 Maintenance Planner, Rotating Equipment",
+      "P12 Operations Superintendent",
+      "P10 Process Safety Lead"
+    ],
+    "pssr_required": true,
+    "corpus_size": 59,
+    "kind": "upgrade",
+    "impacted": [
+      {
+        "entry_id": "km-0003",
+        "title": "IDF high vibration from bearing wear",
+        "health": "review",
+        "confidence_before": 0.88,
+        "confidence_after": 0.634,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "km-0008",
+        "title": "IDF motor current spike from downstream restriction",
+        "health": "review",
+        "confidence_before": 0.76,
+        "confidence_after": 0.671,
+        "reasons": [
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-ctrl_alarm_setpoint_register",
+        "title": "Alarm and Trip Setpoint Register \u2014 All 30 Tags",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.838,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-ctrl_furnace_draft_loop",
+        "title": "Furnace Draft Control Loop \u2014 Description and Tuning",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.831,
+        "reasons": [
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-ctrl_instrument_calibration",
+        "title": "Instrument Calibration Schedule and Tolerance Limits",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.834,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-ds_induced_draft_fan",
+        "title": "Equipment Datasheet \u2014 Induced Draft Fan",
+        "health": "review",
+        "confidence_before": 0.9,
+        "confidence_after": 0.821,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-mnt_boiler_annual_outage",
+        "title": "Annual Outage Master Checklist",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.835,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-mnt_idf_bearing_inspection",
+        "title": "IDF Bearing Shell Inspection and Vibration Check",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.731,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-mnt_idf_blade_inspection",
+        "title": "IDF Fan Blade and Impeller Inspection",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.731,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-mnt_idf_motor_inspection",
+        "title": "IDF Motor Inspection and Current Check",
+        "health": "review",
+        "confidence_before": 0.85,
+        "confidence_after": 0.652,
+        "reasons": [
+          "identity/type of induced_draft_fan changed",
+          "process connections of 'induced_draft_fan' changed (equipment reconfigured)"
+        ]
+      },
+      {
+        "entry_id": "kp-trb_high_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 High Furnace Pressure (Trending Positive)",
+        "health": "review",
+        "confidence_before": 0.8,
+        "confidence_after": 0.77,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "entry_id": "kp-trb_idf_high_current",
+        "title": "Troubleshooting Guide \u2014 IDF Motor High Current",
+        "health": "review",
+        "confidence_before": 0.8,
+        "confidence_after": 0.707,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "entry_id": "kp-trb_idf_high_vibration",
+        "title": "Troubleshooting Guide \u2014 IDF High Bearing Vibration",
+        "health": "review",
+        "confidence_before": 0.8,
+        "confidence_after": 0.707,
+        "reasons": [
+          "alarm setpoints of YFJ3_ZD1 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "alarm setpoints of YFJ3_ZD2 retuned to {'Alert': 3.5, 'Alarm': 3.8, 'Trip': 11.0}",
+          "identity/type of induced_draft_fan changed"
+        ]
+      },
+      {
+        "entry_id": "kp-trb_low_furnace_pressure",
+        "title": "Troubleshooting Guide \u2014 Excessive Furnace Negative Pressure / Draft Loss",
+        "health": "review",
+        "confidence_before": 0.8,
+        "confidence_after": 0.788,
+        "reasons": [
+          "identity/type of induced_draft_fan changed"
+        ]
+      }
+    ],
+    "impacted_count": 14,
+    "n_broken": 0,
+    "n_review": 14,
+    "unaffected": 45,
+    "recommendation": {
+      "level": "review",
+      "text": "Major change (R = 12). 14 knowledge item(s), 21 procedure(s) and 2 alarm limit(s) must be re-confirmed; the rest carries over."
+    }
+  },
+  "expires_at": "",
+  "retro_review_due": "",
+  "decided_by": "",
+  "decision_note": "",
+  "created_at": "2026-11-23T08:04:22+00:00",
+  "decided_at": "",
+  "history": [
+    {
+      "t": "2026-11-23T08:04:22+00:00",
+      "status": "in_review",
+      "by": "P09"
+    }
+  ]
+}
