@@ -1,7 +1,10 @@
-# PlantMemory hub — runtime dependency.
-# The hub itself is pure Python standard library; PyYAML is used to read the
-# on-disk knowledge store. The data the hub needs is bundled in the repo.
+# PlantMemory runtime dependencies.
+# The web hub itself is Python standard library; the Management-of-Change engines
+# (propagation calibration, alarm replay, model MOC, change detection) use these.
 pyyaml>=5.4
+numpy>=1.22
+scipy>=1.8
+duckdb>=0.9
 
-# Optional (only to regenerate evaluation plots or the statistics cache):
-#   pip install -e ".[dev]"   # duckdb, matplotlib, numpy
+# For regenerating report figures and running the tests:
+#   pip install -e ".[dev]"   # matplotlib, pytest
