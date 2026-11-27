@@ -144,13 +144,13 @@
         "KRI": 0.79
       },
       {
-        "asset": "YCLCCY",
+        "asset": "ZCLCCY",
         "coverage_before": 1.0,
         "coverage_after": 0.88,
         "KRI": 0.36
       },
       {
-        "asset": "ZCLCCY",
+        "asset": "YCLCCY",
         "coverage_before": 1.0,
         "coverage_after": 0.88,
         "KRI": 0.36

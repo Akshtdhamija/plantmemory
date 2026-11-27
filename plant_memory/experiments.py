@@ -28,9 +28,9 @@ def _plt():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    plt.rcParams.update({"font.size": 13, "axes.titlesize": 14, "axes.labelsize": 13,
-                         "legend.fontsize": 11.5, "xtick.labelsize": 11.5,
-                         "ytick.labelsize": 11.5, "axes.spines.top": False,
+    plt.rcParams.update({"font.size": 15.5, "axes.titlesize": 16.5, "axes.labelsize": 15.5,
+                         "legend.fontsize": 13.5, "xtick.labelsize": 14,
+                         "ytick.labelsize": 14, "axes.spines.top": False,
                          "axes.spines.right": False, "savefig.dpi": 170})
     return plt
 
@@ -48,8 +48,17 @@ def _fig(plt, fig, name):
     plt.close(fig)
 
 
+NICE = {"kpi_rerate": "KPI re-rate", "idf_bearing_upgrade": "IDF bearing upgrade",
+        "o2_recal": "O$_2$ recalibration", "new_feedstock": "new feedstock",
+        "economizer_replacement": "economizer replacement", "drum_setpoint_retune": "drum setpoint retune",
+        "sensor_decommission": "sensor decommission", "o2_analyzer_bias": "O$_2$ analyser bias",
+        "idf_bearing_rik": "IDF bearing (like for like)"}
+ASSET = {"cyclone_separator_left": "left cyclone", "cyclone_separator_right": "right cyclone",
+         "economizer": "economizer", "induced_draft_fan": "induced draft fan"}
+
+
 def _short(s):
-    return s.replace("_", " ").replace("idf ", "IDF ").replace("kpi", "KPI").replace("o2", "O2")
+    return NICE.get(s, s.replace("_", " "))
 
 
 # ---------------------------------------------------------------------------
@@ -139,8 +148,8 @@ def e2_coverage():
                           ("physical", AMBER, "physically disturbed assets")]:
         v = np.array([r[key] for r in rows]); ax.bar(x, v, bottom=bottom, color=col, label=lab); bottom += v
     ax.set_xticks(x); ax.set_xticklabels([_short(r["scenario"]) for r in rows], rotation=35, ha="right")
-    ax.set_ylabel("items the MOC review must cover")
-    ax.legend(ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.18), frameon=False)
+    ax.set_ylabel("review items"); ax.set_ylim(0, bottom.max() * 1.45)
+    ax.legend(ncol=3, loc="upper center", frameon=False, fontsize=12.5)
     _fig(plt, fig, "E2_coverage")
     return res
 
@@ -161,7 +170,8 @@ def e3_propagation():
     axs[0].axhline(r["random_MAP"], ls="--", color=RED, label=f"random ({r['random_MAP']:.2f})")
     for i, v in enumerate(vals):
         axs[0].text(i, v + 0.006, f"{v:.3f}", ha="center")
-    axs[0].set_ylabel("MAP on held-out days"); axs[0].legend(frameon=False)
+    axs[0].set_ylim(0, max(vals) * 1.22)
+    axs[0].set_ylabel("MAP on held-out days"); axs[0].legend(frameon=False, loc="upper left")
     axs[0].set_title("Where does a disturbance go?")
     plt.setp(axs[0].get_xticklabels(), rotation=15)
     a = sorted(r["alpha_sweep_cal"])
@@ -195,12 +205,12 @@ def e4_replay():
     fig, ax = plt.subplots(figsize=(11.5, 4.4))
     hrs = (ts - ts[0]).astype("timedelta64[s]").astype(float) / 3600
     ax.plot(hrs[::12], x[::12], lw=0.6, color=GREY, label="TE_8332A (5 days)")
-    ax.axhline(sp["TE_8332A"]["Hi"], color=GREEN, lw=2, label=f"current Hi = {sp['TE_8332A']['Hi']} °C")
+    ax.axhline(sp["TE_8332A"]["Hi"], color=GREEN, lw=2, label=f"current Hi = {sp['TE_8332A']['Hi']:.0f} °C")
     ax.axhline(543, color=RED, lw=2, ls="--", label="proposed Hi = 543 °C")
     ax.axhspan(530, 545, color=GREEN, alpha=0.06)
     c = out["cases"]["kpi_rerate"]["rows"][0]
-    ax.set_title(f"Alarm replay of the KPI re-rate: activations {c['activations_before']} -> "
-                 f"{c['activations_after']}, standing time {c['active_h_before']} h -> {c['active_h_after']} h")
+    ax.set_title(f"KPI re-rate replay: Hi alarm activations {c['activations_before']} → "
+                 f"{c['activations_after']}, standing time {c['active_h_before']:.1f} h → {c['active_h_after']:.1f} h")
     ax.set_xlabel("hours"); ax.set_ylabel("°C"); ax.set_ylim(500, 560)
     ax.legend(loc="lower right", ncol=3, frameon=False)
     _fig(plt, fig, "E4_alarm_replay")
@@ -225,7 +235,8 @@ def e5_unmanaged(trials: int = 12):
                     label=f"{lab}: {c['fp_per_day_per_tag']:.2f} false/tag/day")
     axs[0].axhline(0, color="k", lw=0.8)
     axs[0].set_xlabel(r"injected step size ($\sigma$)"); axs[0].set_ylabel("detection above chance (pp)")
-    axs[0].set_title("Detecting a change that skipped MOC"); axs[0].legend(frameon=False, fontsize=9.5)
+    axs[0].set_title("Detecting a change that skipped MOC"); axs[0].legend(frameon=False, fontsize=11.5, loc="upper left")
+    axs[0].set_ylim(-30, 150); axs[0].set_yticks(range(-20, 81, 20))
     for det, col in (("fingerprint", BLUE), ("cusum", AMBER), ("wander", GREEN)):
         cs = [c for c in r["configs"].values() if c["detector"] == det]
         axs[1].plot([c["fp_per_day_per_tag"] for c in cs], [c["excess"][2.0] * 100 for c in cs],
@@ -272,8 +283,13 @@ def e6_model():
     ax.semilogy(s1["t2"][:n], color=RED, lw=0.8, label=f"after new coal blend (FAR {s1['false_alarm_rate']*100:.0f} %)")
     ax.axhline(m.t2_lim, color="k", ls="--", label=f"99 % T² limit = {m.t2_lim:.1f}")
     ax.set_xlabel("held-out minutes"); ax.set_ylabel("Hotelling T² (log)")
-    ax.set_title("A plant change silently breaks the monitoring model; PlantMemory flags it in advance")
-    ax.legend(frameon=False, loc="upper right")
+    from matplotlib.ticker import FixedFormatter, FixedLocator, NullFormatter
+    ticks = [3, 5, 10, 20, 50, 100]
+    ax.yaxis.set_major_locator(FixedLocator(ticks))
+    ax.yaxis.set_major_formatter(FixedFormatter([str(t) for t in ticks]))
+    ax.yaxis.set_minor_formatter(NullFormatter()); ax.set_ylim(2.5, 120)
+    ax.set_title("Monitoring model before and after the new coal blend")
+    ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3)
     _fig(plt, fig, "E6_model_moc")
     return res
 
@@ -307,15 +323,16 @@ def e7_org():
     _save("E7_org", res)
     fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.6))
     ex = p01["assets_exposed"][:10]
-    axs[0].barh([a["asset"] for a in ex][::-1], [a["KRI"] for a in ex][::-1], color=RED)
+    axs[0].barh([ASSET.get(a["asset"], a["asset"]) for a in ex][::-1], [a["KRI"] for a in ex][::-1], color=RED)
     axs[0].set_xlabel("knowledge risk index"); axs[0].set_title("Senior shift engineer leaves: exposed assets")
     ks = sorted(set(res["bus_factor_full"]) | set(res["bus_factor_tacit_only"]))
     w = 0.38
-    axs[1].bar(np.array(ks) - w / 2, [res["bus_factor_tacit_only"].get(k, 0) for k in ks], w,
+    pos = np.arange(len(ks))
+    axs[1].bar(pos - w / 2, [res["bus_factor_tacit_only"].get(k, 0) for k in ks], w,
                color=AMBER, label="tacit (seed) knowledge only")
-    axs[1].bar(np.array(ks) + w / 2, [res["bus_factor_full"].get(k, 0) for k in ks], w,
+    axs[1].bar(pos + w / 2, [res["bus_factor_full"].get(k, 0) for k in ks], w,
                color=GREEN, label="with grounded documented corpus")
-    axs[1].set_xticks(ks); axs[1].set_xticklabels([str(k) if k < 4 else "4+" for k in ks])
+    axs[1].set_xticks(pos); axs[1].set_xticklabels([str(k) if k < 4 else "4+" for k in ks])
     axs[1].set_xlabel("bus factor (people)"); axs[1].set_ylabel("assets")
     axs[1].set_title("Review capacity across the unit"); axs[1].legend(frameon=False)
     _fig(plt, fig, "E7_org")
@@ -348,10 +365,10 @@ def e8_scaling():
     ax.plot([r["N"] for r in rows], [r["saving"] * 100 for r in rows], "o-", color=GREEN)
     for r in rows:
         ax.annotate(f"{r['saving']*100:.1f}%", (r["N"], r["saving"] * 100),
-                    textcoords="offset points", xytext=(0, 8), ha="center", fontsize=10)
-    ax.set_xscale("log"); ax.set_xlabel("knowledge entries (units x 59)")
-    ax.set_ylabel("re-validation effort saved (%)"); ax.set_ylim(60, 102)
-    ax.set_title("Saving grows with the knowledge base when changes stay local")
+                    textcoords="offset points", xytext=(0, 9), ha="center", fontsize=13)
+    ax.set_xscale("log"); ax.set_xlabel("knowledge entries (59 per unit, log scale)")
+    ax.set_ylabel("effort saved (%)"); ax.set_ylim(60, 105)
+    ax.set_title("Saving as the plant grows (changes stay local)")
     _fig(plt, fig, "E8_scaling")
     return {"rows": rows}
 
